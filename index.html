@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和波市立和波東小学校 - 公式ホームページ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 2000年代レトロWeb・学校CMS（NetCommons風）特有のスタイリング */
+        body {
+            font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, 大阪, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+            background-color: #fff6ee;
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* レトロオレンジグラデーション */
+        .orange-header-bg {
+            background: linear-gradient(180deg, #ff9f43 0%, #ff6b6b 100%);
+        }
+        
+        .orange-sky-bg {
+            background: linear-gradient(180deg, #ffa801 0%, #ffd32a 50%, #fff6ee 100%);
+            border-bottom: 3px solid #e67e22;
+        }
+
+        .box-orange-header {
+            background: linear-gradient(180deg, #ff9f43 0%, #ee5253 100%);
+            color: white;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px 4px 0 0;
+            border: 1px solid #d35400;
+            border-bottom: none;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+
+        .box-orange-content {
+            background-color: #ffffff;
+            border: 1px solid #f39c12;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* テーブル・リンク風デザイン */
+        a {
+            color: #d35400;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #e67e22;
+            text-decoration: underline;
+        }
+
+        /* サイドバーリスト */
+        .sidebar-list li {
+            padding: 3px 0 3px 12px;
+            border-bottom: 1px dashed #fcd5ce;
+            position: relative;
+        }
+        .sidebar-list li::before {
+            content: "o";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: #e67e22;
+            font-size: 10px;
+        }
+
+        /* 記事ブロック */
+        .post-box {
+            border: 1px solid #f39c12;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .post-title {
+            background-color: #fff3e0;
+            border-bottom: 1px solid #ffe0b2;
+            color: #d35400;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+
+        .post-body {
+            padding: 12px;
+        }
+
+        .post-footer {
+            text-align: right;
+            font-size: 11px;
+            color: #7f8c8d;
+            padding: 4px 10px;
+            background-color: #fffafa;
+            border-top: 1px dashed #ffe0b2;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        /* カレンダー */
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 11px;
+        }
+        .calendar-table th {
+            background-color: #ffe0b2;
+            color: #d35400;
+            padding: 2px;
+            font-weight: normal;
+        }
+        .calendar-table td {
+            padding: 3px 2px;
+            border: 1px solid #fff3e0;
+        }
+        .calendar-table .today {
+            background-color: #ff9f43;
+            color: white;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+        .calendar-table .sun { color: #e74c3c; }
+        .calendar-table .sat { color: #2980b9; }
+
+        /* レトロボタン */
+        .retro-btn {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            border: 1px solid #b2bec3;
+            border-bottom: 2px solid #636e72;
+            border-right: 2px solid #636e72;
+            padding: 1px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .retro-btn:active {
+            border-bottom: 1px solid #636e72;
+            border-right: 1px solid #636e72;
+            transform: translateY(1px);
+        }
+
+        /* アクティブなメニュー要素 */
+        .sidebar-list a.active-link {
+            font-weight: bold !important;
+            color: #d35400 !important;
+            text-decoration: underline;
+        }
+
+        /* ポータルナビゲーション */
+        .nav-bar {
+            background-color: #ffffff;
+            border: 1px solid #f39c12;
+            height: 28px;
+            margin-bottom: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="max-w-[1020px] mx-auto my-2 px-2">
+
+    <!-- 1. HEADER (ヘッダー領域) -->
+    <header class="bg-orange-500 border-b-4 border-orange-600 rounded-t-lg p-4 relative shadow-sm">
+        <!-- 右上アクセスカウンター領域（総数のみ） -->
+        <div class="absolute top-3 right-3 text-right text-[11px] bg-white/90 px-3 py-1.5 rounded border border-orange-300 shadow-xs select-none">
+            <div class="text-gray-600 mb-0.5">最終更新日：<span id="current-date">2026/10/29</span></div>
+            <div class="text-gray-800 font-bold">アクセスカウンター：<span class="font-mono text-orange-800 text-sm font-bold" id="count-total">000000</span></div>
+        </div>
+
+        <!-- 学校名タイトル（過度なエフェクトを抑えシンプルに） -->
+        <div class="py-5 text-center">
+            <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-wider cursor-pointer" onclick="filterCategory('ALL')">
+                和波市立 和波東小学校
+            </h1>
+            <p class="text-xs text-orange-100 mt-1 font-normal">― 豊かに 学び たくましく 夢に向かって羽ばたく 和波っ子 ―</p>
+        </div>
+    </header>
+
+    <!-- ナビゲーションバー（空白見出し風） -->
+    <div class="nav-bar shadow-xs mb-3 flex items-center px-3 text-xs text-gray-600 justify-between">
+        <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
+            <span>ようこそ 和波東小学校ホームページへ！</span>
+        </div>
+        <div id="filter-indicator" class="font-bold text-orange-600">表示: すべて</div>
+    </div>
+
+    <!-- 2. MAIN 3-COLUMN LAYOUT -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+
+        <!-- ================= LEFT COLUMN ================= -->
+        <div class="md:col-span-3">
+            
+            <!-- カテゴリ -->
+            <div class="box-orange-header">カテゴリ</div>
+            <div class="box-orange-content">
+                <ul class="sidebar-list">
+                    <li><a href="#" id="cat-ALL" onclick="filterCategory('ALL'); return false;" class="active-link">TOP</a></li>
+                    <li><a href="#" id="cat-お知らせ" onclick="filterCategory('お知らせ'); return false;">お知らせ</a></li>
+                    <li><a href="#" id="cat-子どもの様子" onclick="filterCategory('子どもの様子'); return false;">子どもの様子</a></li>
+                </ul>
+            </div>
+
+            <!-- 最新の更新 -->
+            <div class="box-orange-header">最新の更新</div>
+            <div class="box-orange-content">
+                <ul class="sidebar-list text-[11px]">
+                    <li><a href="#post-1" onclick="filterCategory('ALL'); return true;">前期後半 最初の参観・懇談会を行いました 1</a></li>
+                    <li><a href="#post-2" onclick="filterCategory('ALL'); return true;">前期後半 最初の参観・懇談会を行いました 2</a></li>
+                    <li><a href="#post-3" onclick="filterCategory('ALL'); return true;">3年生 学習参観・懇談会ありがとうございました</a></li>
+                    <li><a href="#post-4" onclick="filterCategory('ALL'); return true;">6年 道徳の学習について</a></li>
+                    <li><a href="#post-5" onclick="filterCategory('ALL'); return true;">お買い物へ行こう（かもめ学級）</a></li>
+                    <li><a href="#post-6" onclick="filterCategory('ALL'); return true;">【お知らせ】台風接近に伴う登下校対応について</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- ================= MIDDLE COLUMN (MAIN CONTENT) ================= -->
+        <div class="md:col-span-6" id="main-posts-container">
+
+            <!-- 記事 1 -->
+            <article class="post-box post-item" data-category="子どもの様子" data-archive="2026-10 2026" id="post-1">
+                <div class="post-title">前期後半 最初の参観・懇談会を行いました 1</div>
+                <div class="post-body">
+                    <p class="mb-2">
+                        既に各学年等よりこのホームページにてお伝えしていますが、11日(水)に本校の前期後半最初の参観・懇談会を行いました。当日は、多数のご参加をいただき本当にありがとうございました。
+                    </p>
+                    <p class="mb-2">
+                        どの学年においても、いきいきと活動する、また真剣に学習に取り組む子どもたちの様子を見ていただけたことと思います。子どもたちも、おうちの方々に参観いただきとても嬉しそうでした。
+                    </p>
+                    <p>
+                        これから、約一か月で前期後半も終了し、すぐに後期前半がスタートします。これから、各学年において、また全校的にも大きな行事が続きます。今後とも、本校の教育にご支援とご協力をいただけますよう、よろしくお願いいたします。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【子どもの様子】 2026-10-17 19:19 upt
+                </div>
+            </article>
+
+            <!-- 記事 2 -->
+            <article class="post-box post-item" data-category="子どもの様子" data-archive="2026-10 2026" id="post-2">
+                <div class="post-title">前期後半 最初の参観・懇談会を行いました 2</div>
+                <div class="post-body">
+                    <p>
+                        参観・懇談会の写真の続きです。懇談会にあわせて、5年生では自然教室説明会を、また6年生では修学旅行説明会を行いました。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【子どもの様子】 2026-10-17 19:18 upt
+                </div>
+            </article>
+
+            <!-- 記事 3 -->
+            <article class="post-box post-item" data-category="子どもの様子" data-archive="2026-10 2026" id="post-3">
+                <div class="post-title">3年生 学習参観・懇談会ありがとうございました</div>
+                <div class="post-body">
+                    <p>
+                        先日はご多用の中、学習参観・懇談会に来ていただきありがとうございました。今年3年3組では、グループでの話し合い活動や友達の発表の聞き方を練習しています。グループの話し合い活動では、グループの中で司会を決め、子どもたちだけで話し合いが進められるように練習しています。発表の聞き方では、友達が発表した後にその意見に対して「付け加え公式」や「他にもあります。」、「質問があります。」ということが子ども達が言えるようにしているところです。日に日に子どもたちが意識的に言葉を使っていてとても嬉しく思います。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【子どもの様子】 2026-10-14 08:48 upt
+                </div>
+            </article>
+
+            <!-- 記事 4 -->
+            <article class="post-box post-item" data-category="子どもの様子" data-archive="2026-10 2026" id="post-4">
+                <div class="post-title">6年 道徳の学習について</div>
+                <div class="post-body">
+                    <p>
+                        6年生の道徳の学習の日々の様子です。自分の考えを明確にしながら友達と議論を重ね、友達の考えと自分の考えを比較したり、自分の考えを変更したりして道徳的価値についての学びを深めています。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【子どもの様子】 2026-10-14 08:47 upt
+                </div>
+            </article>
+
+            <!-- 記事 5 -->
+            <article class="post-box post-item" data-category="子どもの様子" data-archive="2026-10 2026" id="post-5">
+                <div class="post-title">お買い物へ行こう</div>
+                <div class="post-body">
+                    <p>
+                        かもめ学級では、生活単元学習の時間に、8・9月のお誕生日会の調理で使う材料を買いに行きました。みんなお勘定を間違えずに、払うことができました。誕生日会が楽しみです。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【子どもの様子】 2026-10-14 08:46 upt
+                </div>
+            </article>
+
+            <!-- 記事 6 -->
+            <article class="post-box post-item" data-category="お知らせ" id="post-6">
+                <div class="post-title">【お知らせ】台風接近に伴う登下校対応について</div>
+                <div class="post-body">
+                    <p class="text-red-600 font-bold mb-1">保護者の皆様へ</p>
+                    <p>
+                        現在接近中の台風に伴い、安全確保のため明日の登校時間を2時間繰り下げといたします。児童の安全な登校につきまして、ご家庭でも声かけとご配慮をお願いいたします。
+                    </p>
+                </div>
+                <div class="post-footer">
+                    【お知らせ】 2026-10-10 16:00 upt
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ================= RIGHT COLUMN ================= -->
+        <div class="md:col-span-3">
+
+            <!-- 検索 -->
+            <div class="box-orange-header">検索</div>
+            <div class="box-orange-content">
+                <form onsubmit="handleSearch(event)">
+                    <input type="text" id="search-input" class="w-full border border-gray-400 p-1 text-xs mb-2 rounded" placeholder="キーワードを入力">
+                    <div class="text-[11px] mb-2">
+                        検索対象期間<br>
+                        <label class="mr-2"><input type="radio" name="search_period" value="year" checked> 年度内</label>
+                        <label><input type="radio" name="search_period" value="all"> すべて</label>
+                    </div>
+                    <button type="submit" class="retro-btn w-full font-bold text-orange-900">検索</button>
+                </form>
+            </div>
+
+            <!-- カレンダー（動的切替対応） -->
+            <div class="box-orange-header flex justify-between items-center">
+                <span>カレンダー</span>
+            </div>
+            <div class="box-orange-content">
+                <div class="flex justify-between items-center text-xs mb-1 text-orange-900 font-bold">
+                    <button onclick="changeMonth(-1)" class="retro-btn px-1.5 py-0">&lt;&lt;</button>
+                    <span id="calendar-month-year">2026年10月</span>
+                    <button onclick="changeMonth(1)" class="retro-btn px-1.5 py-0">&gt;&gt;</button>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th class="sun">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="sat">土</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                        <!-- JSで動的生成 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 行事予定 -->
+            <div class="box-orange-header">行事予定</div>
+            <div class="box-orange-content">
+                <ul class="sidebar-list text-[11px]">
+                    <li><a href="#" onclick="openModal('10月 月間行事予定', '・10/11 参観・懇談会\n・10/20 全校集会\n・10/29 避難訓練'); return false;">月間行事予定</a></li>
+                    <li><a href="#" onclick="openModal('令和8年度 年間行事予定', '・4月 始業式・入学式\n・5月 運動会\n・10月 参観日\n・11月 学習発表会\n・3月 卒業式'); return false;">年間行事予定</a></li>
+                </ul>
+            </div>
+
+            <!-- 配布文書 -->
+            <div class="box-orange-header">配布文書</div>
+            <div class="box-orange-content">
+                <ul class="sidebar-list text-[11px]">
+                    <li><a href="#" onclick="openModal('配布文書一覧', '・学校だより 10月号\n・食育だより 10月号\n・保健だより 秋号'); return false;">配布文書一覧</a></li>
+                    <li><a href="#" onclick="openModal('学校だより（10月号）', '学校だより第7号（PDF）を表示します。'); return false;">学校だより（10月号）</a></li>
+                    <li><a href="#" onclick="openModal('保健だより', '保健だより第5号（PDF）を表示します。'); return false;">保健だより</a></li>
+                </ul>
+            </div>
+
+            <!-- 学校から -->
+            <div class="box-orange-header">学校から</div>
+            <div class="box-orange-content">
+                <ul class="sidebar-list text-[11px]">
+                    <li><a href="#" onclick="openModal('いじめ防止基本方針', '令和8年度 和波市立和波東小学校 いじめ防止基本方針（PDF）'); return false;">令和8年度 和波東小いじめ防止基本方針</a></li>
+                    <li><a href="#" onclick="openModal('学校評価報告書', '令和7年度 学校評価アンケート集計結果および反省報告。'); return false;">令和7年度 学校評価報告書</a></li>
+                </ul>
+            </div>
+
+            <!-- 学校基本情報 -->
+            <div class="box-orange-header">学校基本情報</div>
+            <div class="box-orange-content text-[11px]">
+                <p class="font-bold text-orange-900 mb-1">和波市立 和波東小学校</p>
+                <p>〒790-0012</p>
+                <p>住所：和波市東町2丁目10-15</p>
+                <p>TEL：089-912-3456</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 3. FOOTER -->
+    <footer class="mt-4 pt-3 border-t-2 border-orange-400 text-center text-xs text-gray-600 pb-6">
+        <p>Copyright (C) 和波市立和波東小学校 All Rights Reserved.</p>
+        <p class="text-[10px] text-gray-400 mt-1">掲載の記事・写真・イラスト等のすべてのコンテンツの無断複写・転載を禁じます。</p>
+    </footer>
+
+</div>
+
+<!-- 簡易モーダルダイアログ（リンク動作用） -->
+<div id="custom-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg border-2 border-orange-500 max-w-md w-full p-4 shadow-xl">
+        <div class="flex justify-between items-center border-b border-orange-200 pb-2 mb-3">
+            <h3 id="modal-title" class="font-bold text-orange-900 text-sm"></h3>
+            <button onclick="closeModal()" class="text-gray-500 hover:text-black font-bold px-2">✕</button>
+        </div>
+        <div id="modal-body" class="text-xs text-gray-700 whitespace-pre-line leading-relaxed mb-4"></div>
+        <div class="text-right">
+            <button onclick="closeModal()" class="retro-btn font-bold px-4 py-1 text-xs">閉じる</button>
+        </div>
+    </div>
+</div>
+
+<!-- 簡易インタラクティブスクリプト -->
+<script>
+    // 1. 動的アクセスカウンター機能（初期値は0スタート・総数のみ）
+    const DEFAULT_TOTAL = 0;
+
+    function initCounter() {
+        let total = parseInt(localStorage.getItem('wanami_counter_total'));
+
+        if (isNaN(total)) total = DEFAULT_TOTAL;
+        
+        // 訪問ごとにカウントアップ
+        total += 1;
+
+        localStorage.setItem('wanami_counter_total', total);
+
+        // 数値のカウント表示（桁数をゼロ埋め）
+        animateValue('count-total', 0, total, 800, 6);
+    }
+
+    // 数値カウントアップアニメーション（ゼロ埋め対応）
+    function animateValue(id, start, end, duration, padLength = 1) {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const val = Math.floor(progress * (end - start) + start);
+            obj.innerText = String(val).padStart(padLength, '0');
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // 2. 動的カレンダー生成機能
+    let currentCalDate = new Date(2026, 9, 1); // 初期表示: 2026年10月
+    const todayTarget = { year: 2026, month: 9, date: 29 }; // 本日判定用 (2026年10月29日)
+
+    function renderCalendar() {
+        const year = currentCalDate.getFullYear();
+        const month = currentCalDate.getMonth();
+
+        // 年月表示の更新
+        document.getElementById('calendar-month-year').innerText = `${year}年${month + 1}月`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+        const prevLastDate = new Date(year, month, 0).getDate();
+
+        const tbody = document.getElementById('calendar-body');
+        tbody.innerHTML = '';
+
+        let dayCount = 1;
+        let nextMonthDay = 1;
+
+        for (let i = 0; i < 6; i++) {
+            let row = document.createElement('tr');
+            let hasDateInRow = false;
+
+            for (let j = 0; j < 7; j++) {
+                let cell = document.createElement('td');
+                
+                // 曜日クラスの設定
+                if (j === 0) cell.classList.add('sun');
+                if (j === 6) cell.classList.add('sat');
+
+                if (i === 0 && j < firstDay) {
+                    // 前月の日付
+                    cell.innerText = prevLastDate - firstDay + j + 1;
+                    cell.classList.add('text-gray-400');
+                } else if (dayCount > lastDate) {
+                    // 翌月の日付
+                    cell.innerText = nextMonthDay++;
+                    cell.classList.add('text-gray-400');
+                } else {
+                    // 当月の日付
+                    cell.innerText = dayCount;
+                    hasDateInRow = true;
+
+                    // 今日（2026年10月29日）の判定
+                    if (year === todayTarget.year && month === todayTarget.month && dayCount === todayTarget.date) {
+                        cell.classList.add('today');
+                    }
+
+                    dayCount++;
+                }
+                row.appendChild(cell);
+            }
+
+            if (hasDateInRow || i < 5) {
+                tbody.appendChild(row);
+            }
+        }
+    }
+
+    function changeMonth(delta) {
+        currentCalDate.setMonth(currentCalDate.getMonth() + delta);
+        renderCalendar();
+    }
+
+    // すべてのアクティブ状態の解除補助
+    function clearActiveLinks() {
+        document.querySelectorAll('.sidebar-list a').forEach(a => a.classList.remove('active-link'));
+    }
+
+    // カテゴリフィルター＆太字切り替え機能
+    function filterCategory(category) {
+        clearActiveLinks();
+        const posts = document.querySelectorAll('.post-item');
+        const indicator = document.getElementById('filter-indicator');
+        
+        const activeCat = document.getElementById('cat-' + category);
+        if (activeCat) activeCat.classList.add('active-link');
+
+        let count = 0;
+        posts.forEach(post => {
+            if (category === 'ALL' || post.getAttribute('data-category') === category) {
+                post.style.display = 'block';
+                count++;
+            } else {
+                post.style.display = 'none';
+            }
+        });
+
+        indicator.innerText = `表示: ${category === 'ALL' ? 'すべて' : category} (${count}件)`;
+    }
+
+    // 簡易検索機能
+    function handleSearch(event) {
+        event.preventDefault();
+        clearActiveLinks();
+        const query = document.getElementById('search-input').value.trim().toLowerCase();
+        if (!query) {
+            filterCategory('ALL');
+            return;
+        }
+
+        const posts = document.querySelectorAll('.post-item');
+        let count = 0;
+
+        posts.forEach(post => {
+            const text = post.innerText.toLowerCase();
+            if (text.includes(query)) {
+                post.style.display = 'block';
+                count++;
+            } else {
+                post.style.display = 'none';
+            }
+        });
+
+        document.getElementById('filter-indicator').innerText = `検索結果: "${query}" (${count}件)`;
+    }
+
+    // モーダル機能 (リンクをクリックした際の案内用)
+    function openModal(title, content) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-body').innerText = content;
+        const modal = document.getElementById('custom-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('custom-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    window.onload = function() {
+        initCounter();
+        renderCalendar();
+    };
+</script>
+
+</body>
+</html>
